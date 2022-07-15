@@ -6,7 +6,7 @@ import './styles.css'
 export const App = () => {
   return (
     <>
-      <RHF />
+      <RHF label="ラベル" onClick={() => console.log('xxx')} />
     </>
   )
 }
