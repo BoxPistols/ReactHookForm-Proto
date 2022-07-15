@@ -1,21 +1,22 @@
+/**
+ * [any型で諦めない React.EventCallback - Qiita](https://qiita.com/Takepepe/items/f1ba99a7ca7e66290f24)
+ *
+ */
 import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
 // import { Props } from './Props'
-
 import './styles.css'
 
 type Props = Partial<{
   label: string
-  onClick: (event: any) => void
-  onChange: (event: any) => void
-  onkeypress: (event: any) => void
-  onBlur: (event: any) => void
-  onFocus: (event: any) => void
-  onSubmit: (event: any) => void
-  onClickDiv: (event: any) => void
+  onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onClickButton: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void
+  // onClick: (event: any) => void
 }>
 
-export const RHF: FC<Props> = ({ label, onClick }) => {
+export const RHF: FC<Props> = ({ label, onClick, onClickButton }) => {
   const {
     register,
     handleSubmit,
@@ -44,7 +45,8 @@ export const RHF: FC<Props> = ({ label, onClick }) => {
         {...register('exampleRequired', { required: true, maxLength: 10 })}
       />
       {errors.exampleRequired && <p>This field is required</p>}
-      <button onClick={onClick}>送信</button>
+      {onClick && <button onClick={onClick}>送信</button>}
+      {onClickButton && <button onClick={onClickButton}>送信</button>}
       {/* <input type="submit" /> */}
     </form>
   )
