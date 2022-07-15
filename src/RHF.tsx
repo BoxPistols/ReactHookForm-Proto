@@ -7,14 +7,17 @@ import { useForm } from 'react-hook-form'
 // import { Props } from './Props'
 import './styles.css'
 
-type Props = Partial<{
+type EventProps = (
+  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+) => void
+
+type DesignType = {
   label: string
   onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
-  onClickButton: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void
-  // onClick: (event: any) => void
-}>
+  onClickButton: EventProps
+}
+
+type Props = Partial<DesignType>
 
 export const RHF: FC<Props> = ({ label, onClick, onClickButton }) => {
   const {
