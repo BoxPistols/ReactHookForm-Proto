@@ -1,9 +1,22 @@
-import React from 'react'
+/**
+ * [any型で諦めない React.EventCallback - Qiita](https://qiita.com/Takepepe/items/f1ba99a7ca7e66290f24)
+ *
+ */
+import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
-
+// import { Props } from './Props'
 import './styles.css'
 
-export const RHF = () => {
+type Props = Partial<{
+  label: string
+  onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onClickButton: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void
+  // onClick: (event: any) => void
+}>
+
+export const RHF: FC<Props> = ({ label, onClick, onClickButton }) => {
   const {
     register,
     handleSubmit,
@@ -25,14 +38,16 @@ export const RHF = () => {
         console.log(JSON.stringify(data))
       })}
     >
-      <label>Example</label>
+      <label>{label}</label>
       <input {...register('example')} defaultValue="test" />
       <label>ExampleRequired</label>
       <input
         {...register('exampleRequired', { required: true, maxLength: 10 })}
       />
       {errors.exampleRequired && <p>This field is required</p>}
-      <input type="submit" />
+      {onClick && <button onClick={onClick}>送信</button>}
+      {onClickButton && <button onClick={onClickButton}>送信</button>}
+      {/* <input type="submit" /> */}
     </form>
   )
 }

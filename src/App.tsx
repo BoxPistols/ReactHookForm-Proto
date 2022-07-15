@@ -6,7 +6,8 @@ import './styles.css'
 export const App = () => {
   return (
     <>
-      <RHF />
+      {/* <RHF label="ラベル" onClickButton={() => console.log('onClickButton')} /> */}
+      <RHF label="ラベル" onClick={() => console.log('onClick!')} />
     </>
   )
 }
